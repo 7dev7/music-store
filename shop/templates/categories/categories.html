@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Категории</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="container">
+            <div class="row">
+                {% for type in product_types %}
+                    <div class="row col-md-8 col-md-offset-2">
+                        <div class="single-shop-product">
+                            <h2><a href="/shop/products/{{ type.internal_name }}">{{ type.name }}</a></h2>
+                            <hr>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

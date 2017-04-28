@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>{{ cat_name }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="single-shop-product">
+                            <div class="product-upper">
+                                <img src="{{ product.img.url }}" alt="">
+                            </div>
+                            <h2><a href="/shop/product/{{ product.id }}">{{ product.name }}</a></h2>
+
+                            <div class="product-carousel-price">
+                                <ins>{{ product.price }}</ins>
+                            </div>
+
+                            {% if username %}
+                                <div class="product-option-shop">
+                                    <form method="POST" action="/shop/add_to_cart/" class="cart">
+                                        {% csrf_token %}
+                                        <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}">
+                                        <div class="quantity">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty"
+                                                   value="1"
+                                                   name="amount" id="amount" min="1" step="1">
+                                        </div>
+                                        <button class="add_to_cart_button" type="submit">Добавить в корзину</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

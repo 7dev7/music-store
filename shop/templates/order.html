@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Заказ</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="woocommerce">
+                    <table cellspacing="0" class="shop_table cart">
+                        <thead>
+                        <tr>
+                            <th class="product-name">Продукт</th>
+                            <th class="product-price">Цена</th>
+                            <th class="product-quantity">Количество</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for item in cart_items %}
+                            <tr class="cart_item">
+                                <td class="product-name">
+                                    <a href="shop/product/{{ item.product.id }}">{{ item.product.name }}</a>
+                                </td>
+                                <td class="product-price">
+                                    <span class="amount">{{ item.product.price }}</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="quantity buttons_added">
+                                        <p class="pager">{{ item.quantity }}</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td class="actions" colspan="6">
+                                <b>Итого:</b>
+                                <p id="totalSum">{{ order.total }} руб.</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

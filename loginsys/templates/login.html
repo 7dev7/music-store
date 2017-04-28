@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Войти</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row col-md-8 col-md-offset-2">
+                <form method="POST" action="/auth/login/">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="username">Логин: </label>
+                        <input class="form-control" type="text" name="username" id="username"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Пароль: </label>
+                        <input class="form-control" type="password" name="password" id="password"/>
+                    </div>
+
+                    {% if loginerror %}
+                        <div class="form-group">
+                            <p class="has-error">{{ loginerror }}</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Войти"/>
+                        <a href="/auth/register/" class="btn btn-primary pull-right">Зарегистрироваться</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

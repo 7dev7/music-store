@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Корзина</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="woocommerce">
+                    {% if cart_items == None %}
+                        <h3>Ваша корзина пуста</h3>
+                    {% else %}
+                        <table cellspacing="0" class="shop_table cart">
+                        <thead>
+                        <tr>
+                            <th class="product-remove">&nbsp;</th>
+                            <th class="product-name">Продукт</th>
+                            <th class="product-price">Цена</th>
+                            <th class="product-quantity">Количество</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for item in cart_items %}
+                            <tr class="cart_item">
+                                <td class="product-remove">
+                                    <form action="/shop/remove_item/" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ item.id }}" name="itemId"/>
+                                        <button><i class="glyphicon glyphicon-remove"></i></button>
+                                    </form>
+                                </td>
+
+                                <td class="product-name">
+                                    <a href="shop/product/{{ item.product.id }}">{{ item.product.name }}</a>
+                                </td>
+
+                                <td class="product-price">
+                                    <span class="amount">{{ item.product.price }}</span>
+                                </td>
+
+                                <td class="product-quantity">
+                                    <div class="quantity buttons_added">
+
+                                        <form action="/shop/minus/" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ item.id }}" name="itemId"/>
+                                            <input type="submit" class="btn btn-sm" value="-"/>
+                                        </form>
+
+                                        <p class="pager">{{ item.quantity }}</p>
+
+                                        <form action="/shop/plus/" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{ item.id }}" name="itemId"/>
+                                            <input type="submit" class="btn btn-sm" value="+"/>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td class="actions" colspan="2">
+                                <b>Итого:</b>
+                                <p id="totalSum">{{ sum }} руб.</p>
+                            </td>
+                            <td class="actions" colspan="4">
+                                <form method="POST" action="/shop/create_order/">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Оформить заказ" name="proceed"
+                                           class="checkout-button button alt wc-forward">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

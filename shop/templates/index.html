@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Интернет-магазин</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="slider-area">
+            <!-- Slider -->
+            <div class="block-slider block-slider4">
+                <ul class="" id="bxslider-home4">
+                    <li>
+                        <img src="{% static 'img/bg1.jpg' %}" alt="Slide">
+                    </li>
+                    <li>
+                        <img src="{% static 'img/bg2.jpg' %}" alt="Slide">
+                    </li>
+                </ul>
+            </div>
+            <!-- ./Slider -->
+        </div>
+        <!-- End slider area -->
+    </div>
+
+    <div class="maincontent-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-title">О нас</h2>
+                    <div class="main_text">
+                        Профессиональные музыкальные инструменты по самым низким ценам
+                        <p>Наш интернет-магазин — это более 15 000 наименований музыкальных инструментов и оборудования
+                            по оптовым ценам. Мы сотрудничаем с крупнейшими заводами-изготовителями и дистрибьюторами из
+                            России, Европы, Америки и Китая.
+                            Товары поставляются прямо со склада производителя или официального дистрибьютера.
+                            Это позволяет снизить до минимума все возможные издержки и реализовывать музыкальные
+                            инструменты, звуковое и световое оборудование в розницу по минимальной стоимости.</p>
+
+                        <p>Наш магазин — это музыкальные инструменты мировых брендов для новичков и профессионалов.
+                            Среди наших поставщиков — всемирно известные марки музыкальных инструментов.
+                            Не выходя из дома вы можете купить скрипки, недорогие гитары Parkwood или Strunal (Cremona),
+                            барабаны Sonor Drums и тарелки Paiste, ударные и синтезаторы Medeli, цифровые пианино Orla,
+                            а также баяны, аккордеоны; духовые и народные инструменты.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

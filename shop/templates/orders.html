@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Заказы</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                {% if orders == None %}
+                    <h3>У вас еще нет заказов:(</h3>
+                {% else %}
+                    {% for order in orders %}
+                        <div class="row col-md-8 col-md-offset-2">
+                            <div class="single-shop-product">
+                                <h2><a href="/shop/order/{{ order.id }}">Дата заказа: {{ order.order_date }}</a></h2>
+
+                                <h3>Итого: {{ order.total }} руб.</h3>
+                                <hr>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

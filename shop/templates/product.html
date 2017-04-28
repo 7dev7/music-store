@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>{{ product.name }}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="product-content-right">
+                        <div class="product-breadcroumb">
+                            <a href="#">{{ product.type.basic_type.name }}</a>
+                            <a href="#">{{ product.type.name }}</a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="product-images">
+                                    <div class="product-main-img">
+                                        <img src="{{ product.img.url }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="product-inner">
+                                    <h2 class="product-name">{{ product.name }}</h2>
+
+                                    <div class="product-inner-price">
+                                        Цена:
+                                        <ins>{{ product.price }}</ins>
+                                    </div>
+
+                                    <div class="product-inner-price">
+                                        Количество:
+                                        <ins>{{ product.amount }}</ins>
+                                    </div>
+
+                                    {% if username %}
+                                        <form method="POST" action="/shop/add_to_cart/" class="cart">
+                                            {% csrf_token %}
+                                            <input type="hidden" id="product_id" name="product_id"
+                                                   value="{{ product.id }}">
+
+                                            <div class="quantity">
+                                                <input type="number" size="4" class="input-text qty text" title="Qty"
+                                                       value="1"
+                                                       name="amount" id="amount" min="1" step="1">
+                                            </div>
+                                            <button class="add_to_cart_button" type="submit">Добавить в корзину</button>
+                                        </form>
+                                    {% endif %}
+
+                                    <div class="product-inner-category">
+                                        <p>Категория: <a href="">{{ product.type.name }}</a>.</p>
+                                    </div>
+
+                                    <div role="tabpanel">
+                                        <ul class="product-tab" role="tablist">
+                                            <li role="presentation" class="active"><a href="">Описание</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <h2>Описание товара</h2>
+                                                {{ product.description }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
